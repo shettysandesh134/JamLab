@@ -1,3 +1,19 @@
 <resources>
-    <string name="app_name">JamLab</string>
+    <string name="app_name">Medical App</string>
+    <string name="appName1">Medical</string>
+    <string name="appName2">App</string>
+
+    <!-- onBoardind1-->
+    <string name="onBoarding_1_headline">Find your Doctor</string>
+
+    <!-- onBoardind2-->
+    <string name="onBoarding_2_headline">Storage your\nMedical Records</string>
+
+    <!-- onBoardind3-->
+    <string name="onBoarding_3_headline">Lab tests at home</string>
+
+    <!-- Introduction2 -->
+    <string name="heading2">Find your Doctor</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
