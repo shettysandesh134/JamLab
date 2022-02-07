@@ -20,6 +20,10 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    buildFeatures{
+        viewBinding true
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -63,4 +67,6 @@ dependencies {
 
     def coroutine = "1.3.9"
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine")
+
+    implementation 'com.google.android.libraries.places:places:2.5.0'
 }

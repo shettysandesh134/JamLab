@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="subtitleTextColor">#181461</color>
+    <color name="confirmButton">#2A2AC0</color>
 </resources>

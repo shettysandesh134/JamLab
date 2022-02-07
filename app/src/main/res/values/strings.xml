@@ -2,6 +2,7 @@
     <string name="app_name">Medical App</string>
     <string name="appName1">Medical</string>
     <string name="appName2">App</string>
+    <string name="api_key">AIzaSyDrh1Qg_JGKsQ-8I9S6xqHW3v82tb44v7Y</string>
 
     <!-- onBoardind1-->
     <string name="onBoarding_1_headline">Find your Doctor</string>
@@ -14,6 +15,17 @@
 
     <!-- Introduction2 -->
     <string name="heading2">Find your Doctor</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- User Location-->
+    <string name="confirmButton">Confirm</string>
+
+    <!--Bottom Navigation -->
+    <string name="bottom_nav_1">Home</string>
+    <string name="bottom_nav_2">Articles</string>
+    <string name="bottom_nav_3">Report</string>
+    <string name="bottom_nav_4">More</string>
+
+    <!--Home Fragment -->
+    <string name="doctor_consulting">Doctor Consulting</string>
+
 </resources>
