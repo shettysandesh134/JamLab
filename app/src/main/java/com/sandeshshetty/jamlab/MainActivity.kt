@@ -18,7 +18,6 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    //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
 
     @Inject lateinit var hiltString: String
     @Inject lateinit var medicalService: MedicalService
