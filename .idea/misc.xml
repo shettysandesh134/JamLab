@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/bottom_nav_1.xml" value="0.1865" />
         <entry key="app/src/main/res/drawable/ic_medical_app.xml" value="0.1745" />
         <entry key="app/src/main/res/drawable/ic_noun_heart_3244509.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/mybutton.xml" value="0.168" />

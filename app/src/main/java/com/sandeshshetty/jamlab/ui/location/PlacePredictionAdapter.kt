@@ -1,4 +1,4 @@
-package com.sandeshshetty.jamlab
+package com.sandeshshetty.jamlab.ui.location
 
 // Copyright 2020 Google LLC
 //
@@ -22,6 +22,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.google.android.libraries.places.api.model.AutocompletePrediction
+import com.sandeshshetty.jamlab.R
 import java.util.*
 
 /**

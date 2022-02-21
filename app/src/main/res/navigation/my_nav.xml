@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/viewPagerFragment"
-        android:name="com.sandeshshetty.jamlab.ViewPagerFragment"
+        android:name="com.sandeshshetty.jamlab.ui.onBoarding.OnBoardingViewPagerFragment"
         android:label="fragment_view_pager"
         tools:layout="@layout/fragment_view_pager" >
         <action
@@ -37,7 +37,7 @@
     </fragment>
     <fragment
         android:id="@+id/usersLocation"
-        android:name="com.sandeshshetty.jamlab.UsersLocationFragment"
+        android:name="com.sandeshshetty.jamlab.ui.location.UsersLocationFragment"
         android:label="fragment_users_location"
         tools:layout="@layout/fragment_users_location" >
         <action

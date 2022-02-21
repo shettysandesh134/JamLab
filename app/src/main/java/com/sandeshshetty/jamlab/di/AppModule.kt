@@ -1,6 +1,9 @@
 package com.sandeshshetty.jamlab.di
 
+import android.app.Application
 import android.content.Context
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.net.PlacesClient
 import com.sandeshshetty.jamlab.BaseApplication
 import dagger.Module
 import dagger.Provides
@@ -24,5 +27,9 @@ object AppModule {
     fun provideRandomString(): String {
         return "Dagger Setup String"
     }
+
+    @Singleton
+    @Provides
+    fun providePlacesClient(@ApplicationContext context: Context): PlacesClient = Places.createClient(context)
 
 }

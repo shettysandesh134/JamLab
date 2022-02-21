@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.sandeshshetty.jamlab.databinding.FragmentSplashBinding
 import kotlinx.coroutines.*
 import kotlin.system.measureTimeMillis
 
@@ -17,6 +18,10 @@ import kotlin.system.measureTimeMillis
 class SplashFragment : Fragment() {
 
     val TAG = "SplashFragment"
+
+    private var _binding: FragmentSplashBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,7 +51,9 @@ class SplashFragment : Fragment() {
 
         (activity as AppCompatActivity?)!!.supportActionBar?.hide()
 
-        return inflater.inflate(R.layout.fragment_splash, container, false)
+        _binding = FragmentSplashBinding.inflate(inflater, container, false)
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -2,7 +2,6 @@
     <string name="app_name">Medical App</string>
     <string name="appName1">Medical</string>
     <string name="appName2">App</string>
-    <string name="api_key">AIzaSyDrh1Qg_JGKsQ-8I9S6xqHW3v82tb44v7Y</string>
 
     <!-- onBoardind1-->
     <string name="onBoarding_1_headline">Find your Doctor</string>
