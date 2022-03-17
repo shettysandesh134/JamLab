@@ -1,7 +1,7 @@
 package com.sandeshshetty.jamlab.di
 
 import com.google.gson.GsonBuilder
-import com.sandeshshetty.jamlab.MedicalService
+import com.sandeshshetty.jamlab.framework.datasource.network.repository.MedicalRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,7 +18,7 @@ class NetworkModule {
     @Provides
     fun provideMedicalServices(): Retrofit{
         return Retrofit.Builder()
-            .baseUrl("https://medical.pdbsoftware.com/")
+            .baseUrl("https://medical.pdbsoftware.com")
             .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
             .build()
 
@@ -26,8 +26,8 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun provideMedicalService(retrofit: Retrofit): MedicalService {
-        return retrofit.create(MedicalService::class.java)
+    fun provideMedicalService(retrofit: Retrofit): MedicalRepository {
+        return retrofit.create(MedicalRepository::class.java)
     }
 
 }

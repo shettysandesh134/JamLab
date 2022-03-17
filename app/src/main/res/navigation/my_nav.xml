@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/viewPagerFragment"
-        android:name="com.sandeshshetty.jamlab.ui.onBoarding.OnBoardingViewPagerFragment"
+        android:name="com.sandeshshetty.jamlab.framework.presentation.onBoarding.OnBoardingViewPagerFragment"
         android:label="fragment_view_pager"
         tools:layout="@layout/fragment_view_pager" >
         <action
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/signInFragment"
-        android:name="com.sandeshshetty.jamlab.SignInFragment"
+        android:name="com.sandeshshetty.jamlab.framework.presentation.signin.SignInFragment"
         android:label="fragment_sign_in"
         tools:layout="@layout/fragment_sign_in" >
         <action
@@ -37,7 +37,7 @@
     </fragment>
     <fragment
         android:id="@+id/usersLocation"
-        android:name="com.sandeshshetty.jamlab.ui.location.UsersLocationFragment"
+        android:name="com.sandeshshetty.jamlab.framework.presentation.location.UsersLocationFragment"
         android:label="fragment_users_location"
         tools:layout="@layout/fragment_users_location" >
         <action
@@ -46,7 +46,7 @@
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.sandeshshetty.jamlab.HomeFragment"
+        android:name="com.sandeshshetty.jamlab.framework.presentation.home.HomeFragment"
         android:label="fragment_dash_board"
         tools:layout="@layout/fragment_home" />
 </navigation>

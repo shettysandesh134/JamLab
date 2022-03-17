@@ -26,7 +26,7 @@
         map:uiTiltGestures="true"
         map:uiZoomControls="false"
         map:uiZoomGestures="true"
-        tools:context=".ui.location.UsersLocationFragment" />
+        tools:context=".framework.presentation.location.UsersLocationFragment" />
 
     <LinearLayout
         android:layout_width="match_parent"

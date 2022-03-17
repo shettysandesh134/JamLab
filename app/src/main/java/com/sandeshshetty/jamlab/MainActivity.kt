@@ -1,7 +1,5 @@
 package com.sandeshshetty.jamlab
 
-import android.content.Context
-import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -9,23 +7,25 @@ import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.sandeshshetty.jamlab.business.domain.state.Response
+import com.sandeshshetty.jamlab.business.domain.state.UIComponentType
 import com.sandeshshetty.jamlab.databinding.ActivityMainBinding
+import com.sandeshshetty.jamlab.framework.datasource.network.repository.MedicalRepository
+import com.sandeshshetty.jamlab.framework.presentation.UIController
+import com.sandeshshetty.jamlab.utils.displayToast
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), UIController {
 
     @Inject lateinit var hiltString: String
-    @Inject lateinit var medicalService: MedicalService
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var navHostFragment: NavHostFragment
     private lateinit var navController: NavController
+
+    private lateinit var uiController: UIController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,5 +56,15 @@ class MainActivity : AppCompatActivity() {
 //        CoroutineScope(IO).launch {
 //            medicalService.login()
 //        }
+    }
+
+    override fun onResponseReceived(response: Response) {
+        when(response.uiComponentType) {
+            is UIComponentType.Toast -> {
+                response.message?.let {
+                    displayToast(message = it)
+                }
+            }
+        }
     }
 }
