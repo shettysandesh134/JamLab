@@ -1,14 +1,13 @@
-package com.sandeshshetty.jamlab.framework.presentation.signin
+package com.sandeshshetty.jamlab.framework.presentation.authenticate.signin
 
 import androidx.lifecycle.viewModelScope
-import com.sandeshshetty.jamlab.business.domain.state.MessageType
 import com.sandeshshetty.jamlab.business.domain.state.Response
 import com.sandeshshetty.jamlab.business.domain.state.StateEvent
 import com.sandeshshetty.jamlab.business.domain.state.StateMessage
 import com.sandeshshetty.jamlab.business.usecases.authenicate.SignInUseCase
 import com.sandeshshetty.jamlab.framework.presentation.common.BaseViewModel
-import com.sandeshshetty.jamlab.framework.presentation.signin.state.SignInStateEvent
-import com.sandeshshetty.jamlab.framework.presentation.signin.state.SignInViewState
+import com.sandeshshetty.jamlab.framework.presentation.authenticate.state.AuthenticateStateEvent
+import com.sandeshshetty.jamlab.framework.presentation.authenticate.state.AuthenticateViewState
 import com.sandeshshetty.jamlab.utils.printLogD
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -23,20 +22,21 @@ class SigninViewModel
 @Inject
 constructor(
     private val signInUseCase: SignInUseCase
-): BaseViewModel<SignInViewState>() {
+): BaseViewModel<AuthenticateViewState>() {
 
-    private val _viewState = MutableStateFlow(SignInViewState())
+    private val _viewState = MutableStateFlow(AuthenticateViewState())
     val viewState = _viewState.asStateFlow()
 
-    private val _signInShareFlow = MutableSharedFlow<Response>()
-    val signInSharedFlow = _signInShareFlow.asSharedFlow()
+//    private val _signInShareFlow = MutableSharedFlow<Response>()
+//    val signInSharedFlow = _signInShareFlow.asSharedFlow()
 
     override fun setStateEvent(stateEvent: StateEvent) {
        when (stateEvent) {
-            is SignInStateEvent.LoginUserEvent -> {
+            is AuthenticateStateEvent.LoginUserEvent -> {
                 viewModelScope.launch {
+
                     val loginResult =
-                        signInUseCase.sigInUser(stateEvent.email, stateEvent.password, stateEvent)
+                        signInUseCase(stateEvent.email, stateEvent.password, stateEvent)
 //                    loginResult.let {
 //                        printLogD(
 //                            "\"SignInViewModelGE\"",
@@ -50,7 +50,7 @@ constructor(
 
     }
 
-    override fun handleData(data: SignInViewState) {
+    override fun handleData(data: AuthenticateViewState) {
         data.let { state ->
 
             state?.token?.let {
@@ -60,11 +60,11 @@ constructor(
         }
     }
 
-    override fun handleStateResponse(stateMessage: StateMessage) {
-        viewModelScope.launch {
-            _signInShareFlow.emit(stateMessage.response)
-        }
-    }
+//    override fun handleStateResponse(stateMessage: StateMessage) {
+//        viewModelScope.launch {
+//            _signInShareFlow.emit(stateMessage.response)
+//        }
+//    }
 
 
 }

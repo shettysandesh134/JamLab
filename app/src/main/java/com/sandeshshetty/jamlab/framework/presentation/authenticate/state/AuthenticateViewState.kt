@@ -1,13 +1,11 @@
-package com.sandeshshetty.jamlab.framework.presentation.signin.state
+package com.sandeshshetty.jamlab.framework.presentation.authenticate.state
 
-import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import com.sandeshshetty.jamlab.business.domain.model.user.Profile
 import com.sandeshshetty.jamlab.business.domain.state.ViewState
-import kotlinx.android.parcel.Parcelize
 
 
-data class SignInViewState(
+data class AuthenticateViewState(
     @SerializedName("user")
     var profile: Profile? = null,
 

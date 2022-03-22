@@ -1,6 +1,8 @@
 package com.sandeshshetty.jamlab.utils
 
 import android.app.Activity
+import android.util.Patterns
+import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.widget.SearchView
@@ -37,4 +39,8 @@ fun Activity.displayToast(
 ){
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 //    stateMessageCallback.removeMessageFromStack()
+}
+
+fun String.isEmailVerified(): Boolean{
+    return (!this.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches())
 }
