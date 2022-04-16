@@ -48,4 +48,12 @@
     <!-- Usecase strings -->
     <string name="register_success">User successfully registered</string>
 
+    <!-- Dialog Strings -->
+    <string name="dialog_error_title">Error</string>
+    <string name="dialog_cancel_button">Decline</string>
+    <string name="dialog_ok_button">OK</string>
+    <string name="dialog_success_title">Success</string>
+    <string name="dialog_info_title">Info</string>
+    <string name="home_profilebtn">Profile</string>
+
 </resources>

@@ -5,14 +5,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.sandeshshetty.jamlab.R
+import com.sandeshshetty.jamlab.business.data.preferences.abstraction.DataStoreRepository
 import com.sandeshshetty.jamlab.databinding.FragmentViewPagerBinding
 import com.sandeshshetty.jamlab.framework.presentation.onBoarding.screens.FirstScreen
 import com.sandeshshetty.jamlab.framework.presentation.onBoarding.screens.SecondScreen
 import com.sandeshshetty.jamlab.framework.presentation.onBoarding.screens.ThirdScreen
+import com.sandeshshetty.jamlab.utils.Constants.FIRST_TIME
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class OnBoardingViewPagerFragment : Fragment() {
+
+    @Inject
+    lateinit var dataStoreRepository: DataStoreRepository
 
     private var _binding: FragmentViewPagerBinding? = null
     private val binding
@@ -38,7 +47,10 @@ class OnBoardingViewPagerFragment : Fragment() {
         }
 
         binding.tvSkip.setOnClickListener {
-            findNavController().navigate(R.id.action_viewPagerFragment_to_signInFragment)
+            lifecycleScope.launchWhenStarted {
+                dataStoreRepository.putBoolen(FIRST_TIME, false)
+                findNavController().navigate(R.id.action_viewPagerFragment_to_signInFragment)
+            }
         }
     }
 

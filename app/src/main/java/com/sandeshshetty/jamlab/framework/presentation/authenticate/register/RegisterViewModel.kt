@@ -23,6 +23,7 @@ constructor(
     override fun setStateEvent(stateEvent: StateEvent) {
         when (stateEvent) {
             is AuthenticateStateEvent.RegisterEvent -> {
+                isLoading(stateEvent.shouldDisplayProgressbar())
                 viewModelScope.launch {
                     val result = registerUseCase(stateEvent.registerRequest, stateEvent)
                     launchJob(result, stateEvent)

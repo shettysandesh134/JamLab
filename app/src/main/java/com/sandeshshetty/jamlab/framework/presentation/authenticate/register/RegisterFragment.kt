@@ -80,7 +80,7 @@ class RegisterFragment : Fragment() {
                     when (response.messageType) {
                         is MessageType.Success -> {
 //                            printLogD("RegisterFragment", response.message.toString())
-                            findNavController().navigate(R.id.action_signInFragment_to_usersLocation)
+                            findNavController().navigate(R.id.action_registerFragment_to_usersLocation)
                         }
 
                         is MessageType.Error -> {

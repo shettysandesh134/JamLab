@@ -10,10 +10,17 @@
         android:name="com.sandeshshetty.jamlab.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
+
+<!--        <action-->
+<!--            android:id="@+id/action_splashFragment_to_viewPagerFragment"-->
+<!--            app:destination="@id/viewPagerFragment"-->
+<!--            app:launchSingleTop="true"-->
+<!--            app:popUpTo="@id/splashFragment"-->
+<!--            app:popUpToInclusive="true" />-->
+
         <action
-            android:id="@+id/action_splashFragment_to_viewPagerFragment"
-            app:destination="@id/viewPagerFragment"
-            app:launchSingleTop="true"
+            android:id="@+id/action_splashFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
             app:popUpTo="@id/splashFragment"
             app:popUpToInclusive="true" />
     </fragment>
@@ -24,7 +31,10 @@
         tools:layout="@layout/fragment_view_pager" >
         <action
             android:id="@+id/action_viewPagerFragment_to_signInFragment"
-            app:destination="@id/signInFragment" />
+            app:destination="@id/signInFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/viewPagerFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/signInFragment"
@@ -33,7 +43,9 @@
         tools:layout="@layout/fragment_sign_in" >
         <action
             android:id="@+id/action_signInFragment_to_usersLocation"
-            app:destination="@id/usersLocation" />
+            app:destination="@id/usersLocation"
+            app:popUpTo="@id/signInFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_signInFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
@@ -45,17 +57,54 @@
         tools:layout="@layout/fragment_users_location" >
         <action
             android:id="@+id/action_usersLocation_to_dashBoardFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.sandeshshetty.jamlab.framework.presentation.home.HomeFragment"
         android:label="fragment_dash_board"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_specialityFragment"
+            app:destination="@id/specialityFragment" />
+    </fragment>
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.sandeshshetty.jamlab.framework.presentation.authenticate.register.RegisterFragment"
         android:label="register_fragment"
-        tools:layout="@layout/register_fragment" />
+        tools:layout="@layout/register_fragment" >
+        <action
+            android:id="@+id/action_registerFragment_to_usersLocation"
+            app:destination="@id/usersLocation"
+            app:popUpTo="@id/registerFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.sandeshshetty.jamlab.framework.presentation.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/specialityFragment"
+        android:name="com.sandeshshetty.jamlab.framework.presentation.consultation.SpecialityFragment"
+        android:label="fragment_speciality_list"
+        tools:layout="@layout/fragment_speciality_list" >
+        <action
+            android:id="@+id/action_specialityFragment_to_doctorsFragment"
+            app:destination="@id/doctorsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/doctorsFragment"
+        android:name="com.sandeshshetty.jamlab.framework.presentation.consultation.DoctorsFragment"
+        android:label="fragment_doctors_list"
+        tools:layout="@layout/fragment_doctors_list" >
+        <argument
+            android:name="speciality"
+            app:argType="com.sandeshshetty.jamlab.business.domain.model.consultation.Speciality" />
+    </fragment>
 
 </navigation>

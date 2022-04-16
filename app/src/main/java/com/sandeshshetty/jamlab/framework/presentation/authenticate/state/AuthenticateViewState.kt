@@ -1,18 +1,14 @@
 package com.sandeshshetty.jamlab.framework.presentation.authenticate.state
 
 import com.google.gson.annotations.SerializedName
-import com.sandeshshetty.jamlab.business.domain.model.user.Profile
+import com.sandeshshetty.jamlab.business.domain.model.user.User
 import com.sandeshshetty.jamlab.business.domain.state.ViewState
+import com.sandeshshetty.jamlab.framework.datasource.network.model.user.PatientNetworkEntity
 
 
 data class AuthenticateViewState(
-    @SerializedName("user")
-    var profile: Profile? = null,
-
-    @SerializedName("access_token")
+    val user: User? = null,
     var token: String? = null,
-
-    @SerializedName("message")
     var message: String? = null
 ): ViewState {
 }

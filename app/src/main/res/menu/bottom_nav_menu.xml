@@ -8,7 +8,7 @@
         />
 
     <item
-        android:id="@+id/signInFragment"
+        android:id="@+id/profileFragment"
         android:title="@string/bottom_nav_2"
         android:icon="@drawable/bottom_nav_1"
         />

@@ -3,10 +3,10 @@ package com.sandeshshetty.jamlab.business.usecases.authenicate
 import com.sandeshshetty.jamlab.business.data.network.ApiResponseHandler
 import com.sandeshshetty.jamlab.business.data.network.abstraction.MedicalNetworkDataSource
 import com.sandeshshetty.jamlab.business.data.preferences.abstraction.DataStoreRepository
-import com.sandeshshetty.jamlab.business.data.preferences.util.ACCESS_TOKEN
 import com.sandeshshetty.jamlab.business.data.util.safeApiCall
 import com.sandeshshetty.jamlab.business.domain.state.*
 import com.sandeshshetty.jamlab.framework.presentation.authenticate.state.AuthenticateViewState
+import com.sandeshshetty.jamlab.utils.Constants.ACCESS_TOKEN
 import com.sandeshshetty.jamlab.utils.isEmailVerified
 import kotlinx.coroutines.Dispatchers.IO
 import javax.inject.Inject
@@ -15,7 +15,7 @@ class SignInUseCase
 @Inject
 constructor(
     private val medicalNetworkDataSource: MedicalNetworkDataSource,
-    private val dataStoreRepository: DataStoreRepository,
+    private val dataStoreRepository: DataStoreRepository
 ) {
 
     suspend operator fun invoke(
@@ -23,7 +23,6 @@ constructor(
         password: String,
         stateEvent: StateEvent
     ): DataState<AuthenticateViewState>? {
-
 
         if (!email.isEmailVerified()) {
             return DataState.error(
@@ -47,30 +46,23 @@ constructor(
             override suspend fun handleSuccess(resultObj: AuthenticateViewState): DataState<AuthenticateViewState>? {
                 var message: String? = SIGN_IN_SUCCESS
                 var uiComponentType: UIComponentType = UIComponentType.None()
-                return if (resultObj.token == null){
+                var messageType: MessageType = MessageType.Success()
+
+                if (resultObj.token == null){
                     message = resultObj.message ?: SIGN_IN_FAILED
                     uiComponentType = UIComponentType.Toast()
-                    DataState.data(
+                    messageType = MessageType.Error()
+                }
+
+                return DataState.data(
                         response = Response(
                             message = message,
                             uiComponentType = uiComponentType,
-                            messageType = MessageType.Error()
-                        ),
-                        data = null,
-                        stateEvent = stateEvent
-                    )
-                } else {
-                    DataState.data(
-                        response = Response(
-                            message = message,
-                            uiComponentType = uiComponentType,
-                            messageType = MessageType.Success()
+                            messageType = messageType
                         ),
                         data = resultObj,
                         stateEvent = stateEvent
                     )
-                }
-
             }
 
         }.getResult()
@@ -80,7 +72,6 @@ constructor(
         }
 
         return networkResponse
-
     }
 
     companion object {
@@ -88,6 +79,5 @@ constructor(
         val SIGN_IN_FAILED = "Error Signing In"
         val INVALID_EMAIL_ADDRESS = "Invalid Email Address"
     }
-
 
 }

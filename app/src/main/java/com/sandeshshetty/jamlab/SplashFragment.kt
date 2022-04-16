@@ -61,7 +61,8 @@ class SplashFragment : Fragment() {
 
         lifecycleScope.launchWhenCreated {
             delay(3000)
-            findNavController().navigate(R.id.action_splashFragment_to_viewPagerFragment)
+            findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
+//            findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
         }
 
     }

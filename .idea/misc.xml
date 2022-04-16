@@ -4,18 +4,25 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/bottom_nav_1.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/bottom_tab_item_foreground.xml" value="0.1075" />
         <entry key="app/src/main/res/drawable/ic_medical_app.xml" value="0.1745" />
         <entry key="app/src/main/res/drawable/ic_noun_heart_3244509.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/mybutton.xml" value="0.168" />
         <entry key="app/src/main/res/drawable/splash_bg.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/splash_image.xml" value="0.1745" />
+        <entry key="app/src/main/res/font/lato.xml" value="0.19907407407407407" />
         <entry key="app/src/main/res/font/lato_black.xml" value="0.3111111111111111" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2203125" />
+        <entry key="app/src/main/res/layout/fragment_doctors.xml" value="0.17708333333333334" />
+        <entry key="app/src/main/res/layout/fragment_doctors_list.xml" value="0.17708333333333334" />
         <entry key="app/src/main/res/layout/fragment_first_screen.xml" value="0.3645833333333333" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.303125" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.375" />
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/fragment_second_scree.xml" value="0.3645833333333333" />
         <entry key="app/src/main/res/layout/fragment_sign_in.xml" value="0.223731884057971" />
+        <entry key="app/src/main/res/layout/fragment_speciality.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/fragment_speciality_list.xml" value="0.38958333333333334" />
         <entry key="app/src/main/res/layout/fragment_splash.xml" value="0.4008152173913043" />
         <entry key="app/src/main/res/layout/fragment_third_screen.xml" value="0.3645833333333333" />
         <entry key="app/src/main/res/layout/fragment_users_location.xml" value="0.29357798165137616" />
@@ -24,6 +31,7 @@
         <entry key="app/src/main/res/layout/register_fragment.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/user_location_view.xml" value="0.12335359675785208" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.303125" />
+        <entry key="app/src/main/res/menu/home_app_bar_menu.xml" value="1.8857142857142857" />
       </map>
     </option>
   </component>

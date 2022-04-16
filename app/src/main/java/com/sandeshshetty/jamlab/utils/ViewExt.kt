@@ -41,6 +41,14 @@ fun Activity.displayToast(
 //    stateMessageCallback.removeMessageFromStack()
 }
 
+fun Fragment.displayToast(
+    message: String,
+//    stateMessageCallback: StateMessageCallback
+){
+    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+//    stateMessageCallback.removeMessageFromStack()
+}
+
 fun String.isEmailVerified(): Boolean{
     return (!this.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches())
 }

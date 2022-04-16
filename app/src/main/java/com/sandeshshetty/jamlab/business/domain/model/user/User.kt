@@ -5,9 +5,9 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class User(
-    val id: String,
+    val id: Int,
     val lid: String,
-    val profile: Profile,
+    val profileImage: ProfileImage? = null,
     val fname: String? = null,
     val lname: String? = null,
     val description: String? = null,
@@ -37,6 +37,7 @@ data class User(
     val rating: String? = null,
     val type: String? = null,
     val status: String? = null,
+    val location: Location? = null
 ): Parcelable{
 
 }

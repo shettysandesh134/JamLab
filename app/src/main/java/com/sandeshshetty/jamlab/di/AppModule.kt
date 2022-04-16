@@ -11,6 +11,8 @@ import com.sandeshshetty.jamlab.business.data.preferences.abstraction.DataStoreR
 import com.sandeshshetty.jamlab.business.data.preferences.implementation.DataStoreRepositoryImpl
 import com.sandeshshetty.jamlab.framework.datasource.network.abstraction.MedicalNetworkService
 import com.sandeshshetty.jamlab.framework.datasource.network.implementation.MedicalNetworkServiceImpl
+import com.sandeshshetty.jamlab.framework.datasource.network.mapper.PatientNetworkMapper
+import com.sandeshshetty.jamlab.framework.datasource.network.mapper.SpecialityNetworkMapper
 import com.sandeshshetty.jamlab.framework.datasource.network.repository.MedicalRepository
 import dagger.Module
 import dagger.Provides
@@ -49,16 +51,30 @@ object AppModule {
 
     @Singleton
     @Provides
+    fun providePatientNetworkMapper(): PatientNetworkMapper {
+        return PatientNetworkMapper()
+    }
+
+    @Singleton
+    @Provides
+    fun provideSpecialityNetworkMapper(): SpecialityNetworkMapper {
+        return SpecialityNetworkMapper()
+    }
+
+    @Singleton
+    @Provides
     fun provideMedicalNetworkService(
-        medicalRepository: MedicalRepository
+        medicalRepository: MedicalRepository,
+        patientNetworkMapper: PatientNetworkMapper,
+        specialityNetworkMapper: SpecialityNetworkMapper
     ): MedicalNetworkService {
-        return MedicalNetworkServiceImpl(medicalRepository)
+        return MedicalNetworkServiceImpl(medicalRepository, patientNetworkMapper, specialityNetworkMapper)
     }
 
     @Singleton
     @Provides
     fun provideMedicalNetworkDataSource(
-        medicalNetworkService: MedicalNetworkServiceImpl
+        medicalNetworkService: MedicalNetworkServiceImpl,
     ): MedicalNetworkDataSource {
         return MedicalNetworkDataSourceImpl(medicalNetworkService)
     }

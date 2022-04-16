@@ -2,10 +2,7 @@ package com.sandeshshetty.jamlab.business.data.preferences.implementation
 
 import android.content.Context
 import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.intPreferencesKey
-import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
 import com.sandeshshetty.jamlab.business.data.preferences.abstraction.DataStoreRepository
 import kotlinx.coroutines.flow.first
@@ -35,6 +32,13 @@ constructor(
         }
     }
 
+    override suspend fun putBoolen(key: String, value: Boolean) {
+        val preferenceKey = booleanPreferencesKey(key)
+        context.dataStore.edit { preferences ->
+            preferences[preferenceKey] = value
+        }
+    }
+
     override suspend fun getString(key: String): String? {
         val preferenceKey = stringPreferencesKey(key)
         val preferences = context.dataStore.data.first()
@@ -43,6 +47,12 @@ constructor(
 
     override suspend fun getInt(key: String): Int? {
         val preferenceKey = intPreferencesKey(key)
+        val preferences = context.dataStore.data.first()
+        return preferences[preferenceKey]
+    }
+
+    override suspend fun getBoolean(key: String): Boolean? {
+        val preferenceKey = booleanPreferencesKey(key)
         val preferences = context.dataStore.data.first()
         return preferences[preferenceKey]
     }

@@ -35,6 +35,8 @@ constructor(
             is AuthenticateStateEvent.LoginUserEvent -> {
                 viewModelScope.launch {
 
+                    isLoading(stateEvent.shouldDisplayProgressbar())
+
                     val loginResult =
                         signInUseCase(stateEvent.email, stateEvent.password, stateEvent)
 //                    loginResult.let {
@@ -51,11 +53,16 @@ constructor(
     }
 
     override fun handleData(data: AuthenticateViewState) {
+
         data.let { state ->
 
             state?.token?.let {
                 _viewState.value.copy(token = it)
                 printLogD("SignInViewModelhandleData", it.toString())
+            }
+            state?.user?.let {
+                _viewState.value.copy(user = it)
+                printLogD("SignInViewModelhandleData", "${it.fname.toString()} is ${it.verified.toString()}")
             }
         }
     }
