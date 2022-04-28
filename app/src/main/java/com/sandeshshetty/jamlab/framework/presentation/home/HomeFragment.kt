@@ -1,10 +1,8 @@
 package com.sandeshshetty.jamlab.framework.presentation.home
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -34,12 +32,13 @@ class HomeFragment: Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        setHasOptionsMenu(true)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.myToolbar.inflateMenu(R.menu.home_app_bar_menu)
+//        binding.homeToolbar.inflateMenu(R.menu.home_app_bar_menu)
 
         checkNavigation()
 
@@ -51,6 +50,11 @@ class HomeFragment: Fragment() {
             findNavController().navigate(R.id.action_homeFragment_to_specialityFragment)
         }
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.home_app_bar_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onDestroyView() {

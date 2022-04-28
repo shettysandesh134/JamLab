@@ -5,9 +5,14 @@ import com.sandeshshetty.jamlab.business.domain.model.user.ProfileImage
 import com.sandeshshetty.jamlab.business.domain.model.user.User
 import com.sandeshshetty.jamlab.business.domain.util.EntityMapper
 import com.sandeshshetty.jamlab.framework.datasource.network.model.user.PatientNetworkEntity
+import javax.inject.Inject
 
 
-class PatientNetworkMapper: EntityMapper<PatientNetworkEntity, User> {
+class PatientNetworkMapper
+@Inject
+constructor(
+    private val locationNetworkMapper: LocationNetworkMapper
+): EntityMapper<PatientNetworkEntity, User> {
 
     override fun mapFromEntity(entity: PatientNetworkEntity): User {
         return User(
@@ -60,19 +65,7 @@ class PatientNetworkMapper: EntityMapper<PatientNetworkEntity, User> {
             type = entity.type,
             status = entity.status,
             location = entity.location?.let {
-                Location(
-                    id = entity.location.id,
-                    address = entity.location.address,
-                    country = entity.location.country,
-                    state = entity.location.state,
-                    city = entity.location.city,
-                    street = entity.location.street,
-                    postcode = entity.location.postcode,
-                    lat = entity.location.lat,
-                    long = entity.location.long,
-                    type = entity.location.type,
-                    status = entity.location.status
-                )
+                locationNetworkMapper.mapFromEntity(it)
             }
         )
 

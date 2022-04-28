@@ -27,14 +27,15 @@ constructor(
 
     init {
         viewModelScope.launch {
-            val result = getSpecialityListUseCase(SpecialityStateEvent.GetSpecialityList())
-            launchJob(result, SpecialityStateEvent.GetSpecialityList())
+            isLoading(SpecialityStateEvent.GetSpecialityListEvent().shouldDisplayProgressbar())
+            val result = getSpecialityListUseCase(SpecialityStateEvent.GetSpecialityListEvent())
+            launchJob(result, SpecialityStateEvent.GetSpecialityListEvent())
         }
     }
 
     override fun setStateEvent(stateEvent: StateEvent) {
         when (stateEvent) {
-            is SpecialityStateEvent.OnSpecialityClick -> {
+            is SpecialityStateEvent.OnSpecialityClickEvent -> {
                 viewModelScope.launch {
                     _specialityShareFlow.emit(stateEvent)
                 }

@@ -18,6 +18,7 @@ import com.sandeshshetty.jamlab.business.domain.state.MessageType
 import com.sandeshshetty.jamlab.databinding.FragmentSignInBinding
 import com.sandeshshetty.jamlab.framework.presentation.UIController
 import com.sandeshshetty.jamlab.framework.presentation.authenticate.state.AuthenticateStateEvent
+import com.sandeshshetty.jamlab.utils.setUiController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -28,7 +29,7 @@ class SignInFragment : Fragment() {
     private val binding get() = _binding!!
     private val signinViewModel: SigninViewModel by viewModels()
 
-    private lateinit var uiController: UIController
+    private var uiController: UIController? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,7 +42,7 @@ class SignInFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        setUIController()
+        uiController = requireActivity().setUiController()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -84,7 +85,7 @@ class SignInFragment : Fragment() {
                         }
 
                         is MessageType.Error -> {
-                            uiController.onResponseReceived(response)
+                            uiController?.onResponseReceived(response)
 //                            Toast.makeText(context, response.message, Toast.LENGTH_LONG).show()
                         }
                     }
@@ -93,24 +94,10 @@ class SignInFragment : Fragment() {
         }
 
         signinViewModel.shouldDisplayProgressBar.observe(viewLifecycleOwner, Observer{
-            uiController.displayProgessBar(it)
+            uiController?.displayProgessBar(it)
         })
 
 
-    }
-
-
-    private fun setUIController() {
-        activity?.let {
-            if (it is MainActivity) {
-                try {
-                    uiController = requireActivity() as UIController
-                } catch (e: ClassCastException) {
-                    e.printStackTrace()
-                }
-
-            }
-        }
     }
 
 

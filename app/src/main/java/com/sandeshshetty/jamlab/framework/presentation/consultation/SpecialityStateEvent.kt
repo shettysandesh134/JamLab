@@ -5,7 +5,7 @@ import com.sandeshshetty.jamlab.business.domain.state.StateEvent
 
 sealed class SpecialityStateEvent: StateEvent {
 
-    class OnSpecialityClick(
+    class OnSpecialityClickEvent(
         val speciality: Speciality
     ): SpecialityStateEvent() {
 
@@ -21,7 +21,7 @@ sealed class SpecialityStateEvent: StateEvent {
 
     }
 
-    class GetSpecialityList(): SpecialityStateEvent() {
+    class GetSpecialityListEvent(): SpecialityStateEvent() {
         override fun errorInfo(): String {
             return "List not found"
         }

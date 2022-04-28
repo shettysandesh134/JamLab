@@ -6,6 +6,7 @@ import com.sandeshshetty.jamlab.framework.datasource.network.abstraction.Medical
 import com.sandeshshetty.jamlab.framework.presentation.authenticate.register.RegisterRequest
 import com.sandeshshetty.jamlab.framework.presentation.authenticate.register.RegisterResponse
 import com.sandeshshetty.jamlab.framework.presentation.authenticate.state.AuthenticateViewState
+import com.sandeshshetty.jamlab.framework.presentation.consultation.DoctorListViewState
 import com.sandeshshetty.jamlab.framework.presentation.consultation.SpecialityViewState
 import com.sandeshshetty.jamlab.framework.presentation.profile.ProfileViewState
 import javax.inject.Inject
@@ -30,5 +31,9 @@ constructor(
 
     override suspend fun getSpecialityList(): SpecialityViewState {
         return medicalNetworkService.getSpecialityList()
+    }
+
+    override suspend fun getDoctorList(specialityName: String): DoctorListViewState {
+        return medicalNetworkService.getDoctorList(specialityName)
     }
 }

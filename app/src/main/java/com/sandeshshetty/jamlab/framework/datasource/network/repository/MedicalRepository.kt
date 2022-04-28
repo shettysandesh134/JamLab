@@ -6,6 +6,7 @@ import com.sandeshshetty.jamlab.framework.presentation.authenticate.register.Reg
 import com.sandeshshetty.jamlab.framework.presentation.authenticate.register.RegisterResponse
 import com.sandeshshetty.jamlab.framework.presentation.authenticate.signin.SignInRequest
 import com.sandeshshetty.jamlab.framework.presentation.authenticate.state.AuthenticateViewState
+import com.sandeshshetty.jamlab.framework.presentation.consultation.DoctorListNetworkResponse
 import com.sandeshshetty.jamlab.framework.presentation.consultation.SpecialityResponse
 import com.sandeshshetty.jamlab.framework.presentation.consultation.SpecialityViewState
 import com.sandeshshetty.jamlab.framework.presentation.profile.ProfileResponse
@@ -35,5 +36,12 @@ interface MedicalRepository {
     @Headers("content-type: application/json", "Accept: application/json")
     @GET("/api/public/specialities")
     suspend fun getSpecialities(): SpecialityResponse
+
+    @Headers("content-type: application/json", "Accept: application/json")
+    @GET("/api/public/search")
+    suspend fun getDoctors(
+        @Query("q")query: String
+    ): DoctorListNetworkResponse
+
 
 }

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.sandeshshetty.jamlab.framework.presentation.consultation.DoctorFilterBottomSheetFragment">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.sandeshshetty.jamlab.framework.presentation.consultation.DoctorsViewModel"/>
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/filterHeaderTextView"
+                style="@style/Widget.MaterialComponents.TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:text="Filter Doctors"
+                android:textColor="@color/colorPrimary"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <ScrollView
+                android:id="@+id/scrollView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/genderFilterHeaderTextView"
+                        style="@style/TextAppearance.Title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Gender"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <CheckBox
+                        android:id="@+id/maleFilterCheckBox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Male"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:checked="@{viewModel.doctorStateFlow.gender.equals(@string/doctor_filter_gender_male)}"
+                        android:onClick="@{() -> viewModel.setGender(@string/doctor_filter_gender_male)}"
+                        app:layout_constraintTop_toBottomOf="@id/genderFilterHeaderTextView" />
+
+                    <CheckBox
+                        android:id="@+id/femaleFilterCheckBox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Female"
+                        android:checked="@{viewModel.doctorStateFlow.gender.equals(@string/doctor_filter_gender_female)}"
+                        android:onClick="@{() -> viewModel.setGender(@string/doctor_filter_gender_female)}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/maleFilterCheckBox" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </ScrollView>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/filterConfirmButton"
+                style="@style/TextAppearance.Button"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="16dp"
+                android:layout_below="@+id/scrollView"
+                android:layout_marginHorizontal="8dp"
+                android:background="@color/colorPrimary"
+                android:text="@string/doctor_filter_confirmButton" />
+
+
+        </LinearLayout>
+    </FrameLayout>
+</layout>

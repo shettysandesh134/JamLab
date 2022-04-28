@@ -7,6 +7,7 @@ import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.dialog.MaterialDialogs
@@ -47,6 +48,9 @@ class MainActivity : AppCompatActivity(), UIController {
 
         binding.bottomNavigationView.setupWithNavController(navController)
 
+        setSupportActionBar(toolbar)
+        setupActionBarWithNavController(navController)
+
         navController.addOnDestinationChangedListener { _, destination, _ ->
 //            if (destination.id == R.id.splashFragment || destination.id == R.id.viewPagerFragment || destination.id == R.id.usersLocation){
 //                binding.bottomNavigationView.apply {
@@ -66,10 +70,10 @@ class MainActivity : AppCompatActivity(), UIController {
             }
 
         }
+    }
 
-//        CoroutineScope(IO).launch {
-//            medicalService.login()
-//        }
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
     override fun displayProgessBar(isDisplayed: Boolean) {

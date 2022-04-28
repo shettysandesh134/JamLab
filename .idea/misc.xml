@@ -13,7 +13,8 @@
         <entry key="app/src/main/res/font/lato.xml" value="0.19907407407407407" />
         <entry key="app/src/main/res/font/lato_black.xml" value="0.3111111111111111" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2203125" />
-        <entry key="app/src/main/res/layout/fragment_doctors.xml" value="0.17708333333333334" />
+        <entry key="app/src/main/res/layout/fragment_doctor_filter_bottom_sheet.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/fragment_doctors.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_doctors_list.xml" value="0.17708333333333334" />
         <entry key="app/src/main/res/layout/fragment_first_screen.xml" value="0.3645833333333333" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
@@ -31,6 +32,7 @@
         <entry key="app/src/main/res/layout/register_fragment.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/user_location_view.xml" value="0.12335359675785208" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.303125" />
+        <entry key="app/src/main/res/menu/doctor_list_app_bar_menu.xml" value="0.26927083333333335" />
         <entry key="app/src/main/res/menu/home_app_bar_menu.xml" value="1.8857142857142857" />
       </map>
     </option>

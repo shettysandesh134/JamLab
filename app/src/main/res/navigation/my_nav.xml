@@ -100,11 +100,20 @@
     <fragment
         android:id="@+id/doctorsFragment"
         android:name="com.sandeshshetty.jamlab.framework.presentation.consultation.DoctorsFragment"
-        android:label="fragment_doctors_list"
+        android:label="Doctors"
         tools:layout="@layout/fragment_doctors_list" >
         <argument
             android:name="speciality"
             app:argType="com.sandeshshetty.jamlab.business.domain.model.consultation.Speciality" />
+        <action
+            android:id="@+id/action_doctorsFragment_to_doctorFilterBottomSheetFragment"
+            app:destination="@id/doctorFilterBottomSheetFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/doctorFilterBottomSheetFragment"
+        android:name="com.sandeshshetty.jamlab.framework.presentation.consultation.DoctorFilterBottomSheetFragment"
+        android:label="fragment_doctor_filter_bottom_sheet"
+        tools:layout="@layout/fragment_doctor_filter_bottom_sheet"
+        />
 
 </navigation>

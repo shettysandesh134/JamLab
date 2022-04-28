@@ -52,3 +52,18 @@ fun Fragment.displayToast(
 fun String.isEmailVerified(): Boolean{
     return (!this.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches())
 }
+
+fun Activity.setUiController(
+
+): UIController? {
+    this.let {
+        if (it is MainActivity) {
+            try {
+               return this as UIController
+            } catch (e: ClassCastException) {
+                e.printStackTrace()
+            }
+        }
+    }
+    return null
+}

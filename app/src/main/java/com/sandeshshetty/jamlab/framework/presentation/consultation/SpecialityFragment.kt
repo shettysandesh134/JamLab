@@ -11,7 +11,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import com.sandeshshetty.jamlab.R
 import com.sandeshshetty.jamlab.business.domain.model.consultation.Speciality
 import com.sandeshshetty.jamlab.business.domain.state.MessageType
 import com.sandeshshetty.jamlab.databinding.FragmentSpecialityListBinding
@@ -32,7 +31,7 @@ class SpecialityFragment : Fragment(), MySpecialityRecyclerViewAdapter.OnItemCli
     private val specialityViewModel: SpecialityViewModel by viewModels()
 
     private val specialities: ArrayList<Speciality> = ArrayList<Speciality>()
-    val specialityAdapter = MySpecialityRecyclerViewAdapter(this, specialities)
+    private val specialityAdapter = MySpecialityRecyclerViewAdapter(this, specialities)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -104,7 +103,7 @@ class SpecialityFragment : Fragment(), MySpecialityRecyclerViewAdapter.OnItemCli
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 specialityViewModel.specialitySharedFlow.collect { stateEvent->
                     when (stateEvent) {
-                        is SpecialityStateEvent.OnSpecialityClick->{
+                        is SpecialityStateEvent.OnSpecialityClickEvent->{
                             val action = SpecialityFragmentDirections.actionSpecialityFragmentToDoctorsFragment(stateEvent.speciality)
                             findNavController().navigate(action)
                         }
@@ -118,6 +117,6 @@ class SpecialityFragment : Fragment(), MySpecialityRecyclerViewAdapter.OnItemCli
 
     override fun onItemClick(speciality: Speciality) {
         displayToast(speciality.name)
-        specialityViewModel.setStateEvent(SpecialityStateEvent.OnSpecialityClick(speciality = speciality))
+        specialityViewModel.setStateEvent(SpecialityStateEvent.OnSpecialityClickEvent(speciality = speciality))
     }
 }

@@ -24,11 +24,9 @@ class SpecialityNetworkMapper : EntityMapper<SpecialityNetworkEntity, Speciality
     }
 
     fun mapFromEntityList(entities: List<SpecialityNetworkEntity>?): List<Speciality>? {
-        entities?.let {
             return entities?.map { entity ->
                 mapFromEntity(entity)
             }
-        }
         return null
     }
 

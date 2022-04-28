@@ -1,22 +1,34 @@
 package com.sandeshshetty.jamlab.framework.presentation.consultation
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.sandeshshetty.jamlab.R
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView
+import com.sandeshshetty.jamlab.business.domain.model.consultation.Doctor
 import com.sandeshshetty.jamlab.databinding.FragmentDoctorsBinding
+import kotlinx.android.synthetic.main.fragment_doctors.view.*
 
-import com.sandeshshetty.jamlab.framework.presentation.consultation.placeholder.PlaceholderContent.PlaceholderItem
 
 /**
  * [RecyclerView.Adapter] that can display a [PlaceholderItem].
  * TODO: Replace the implementation with code for your data type.
  */
-class DoctorsRecyclerViewAdapter(
-    private val values: List<PlaceholderItem>
-) : RecyclerView.Adapter<DoctorsRecyclerViewAdapter.ViewHolder>() {
+class DoctorsRecyclerViewAdapter : RecyclerView.Adapter<DoctorsRecyclerViewAdapter.ViewHolder>() {
+
+    private val differCallback = object : DiffUtil.ItemCallback<Doctor>() {
+        override fun areItemsTheSame(oldItem: Doctor, newItem: Doctor): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: Doctor, newItem: Doctor): Boolean {
+            return oldItem == newItem
+        }
+
+    }
+
+    val differ = AsyncListDiffer(this, differCallback)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -31,20 +43,26 @@ class DoctorsRecyclerViewAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = values[position]
-        holder.idView.text = item.id
-        holder.contentView.text = item.content
+        val item = differ.currentList.get(position)
+        holder.doctorName.text = item.fname
+        holder.doctorSpeciality.text = item.specialities?.get(0)?.name.toString()
+        holder.doctorLocation.text = item.gender
     }
 
-    override fun getItemCount(): Int = values.size
+    override fun getItemCount(): Int = differ.currentList.size
+
+    fun submitList(doctors: List<Doctor>) {
+        differ.submitList(doctors)
+    }
 
     inner class ViewHolder(binding: FragmentDoctorsBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        val idView: TextView = binding.itemNumber
-        val contentView: TextView = binding.content
+        val doctorName: TextView = binding.doctorNameTextView
+        val doctorSpeciality: TextView = binding.doctorSpecialityTextView
+        val doctorLocation: TextView = binding.doctorLocationTextView
 
         override fun toString(): String {
-            return super.toString() + " '" + contentView.text + "'"
+            return super.toString() + " '" + doctorSpeciality.text + "'"
         }
     }
 

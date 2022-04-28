@@ -55,5 +55,11 @@
     <string name="dialog_success_title">Success</string>
     <string name="dialog_info_title">Info</string>
     <string name="home_profilebtn">Profile</string>
+    <string name="doctor_list_filter_menu">filter</string>
+
+    <!--- Doctor Filter -->
+    <string name="doctor_filter_gender_male">M</string>
+    <string name="doctor_filter_gender_female">F</string>
+    <string name="doctor_filter_confirmButton">CONFIRM</string>
 
 </resources>

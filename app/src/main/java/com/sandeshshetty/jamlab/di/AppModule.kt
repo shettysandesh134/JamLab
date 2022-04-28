@@ -9,10 +9,10 @@ import com.sandeshshetty.jamlab.business.data.network.abstraction.MedicalNetwork
 import com.sandeshshetty.jamlab.business.data.network.implementation.MedicalNetworkDataSourceImpl
 import com.sandeshshetty.jamlab.business.data.preferences.abstraction.DataStoreRepository
 import com.sandeshshetty.jamlab.business.data.preferences.implementation.DataStoreRepositoryImpl
+import com.sandeshshetty.jamlab.business.domain.util.EntityMapper
 import com.sandeshshetty.jamlab.framework.datasource.network.abstraction.MedicalNetworkService
 import com.sandeshshetty.jamlab.framework.datasource.network.implementation.MedicalNetworkServiceImpl
-import com.sandeshshetty.jamlab.framework.datasource.network.mapper.PatientNetworkMapper
-import com.sandeshshetty.jamlab.framework.datasource.network.mapper.SpecialityNetworkMapper
+import com.sandeshshetty.jamlab.framework.datasource.network.mapper.*
 import com.sandeshshetty.jamlab.framework.datasource.network.repository.MedicalRepository
 import dagger.Module
 import dagger.Provides
@@ -51,8 +51,36 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun providePatientNetworkMapper(): PatientNetworkMapper {
-        return PatientNetworkMapper()
+    fun provideLocationNetworkMapper(): LocationNetworkMapper {
+        return LocationNetworkMapper()
+    }
+
+    @Singleton
+    @Provides
+    fun provideSymptomNetworkMapper(): SymptomNetworkMapper {
+        return SymptomNetworkMapper()
+    }
+
+    @Singleton
+    @Provides
+    fun provideQualificationNetworkMapper(): QualificationNetworkMapper {
+        return QualificationNetworkMapper()
+    }
+
+    @Singleton
+    @Provides
+    fun provideClinicNetworkMapper(
+        locationNetworkMapper: LocationNetworkMapper
+    ): ClinicNetworkMapper {
+        return ClinicNetworkMapper(locationNetworkMapper)
+    }
+
+    @Singleton
+    @Provides
+    fun providePatientNetworkMapper(
+        locationNetworkMapper: LocationNetworkMapper
+    ): PatientNetworkMapper {
+        return PatientNetworkMapper(locationNetworkMapper)
     }
 
     @Singleton
@@ -63,12 +91,25 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideMedicalNetworkService(
-        medicalRepository: MedicalRepository,
+    fun providesListNetworkMappers(
+        doctorNetworkMapper: DoctorNetworkMapper,
         patientNetworkMapper: PatientNetworkMapper,
         specialityNetworkMapper: SpecialityNetworkMapper
+    ): ListNetworkMappers {
+        return ListNetworkMappers(
+            doctorNetworkMapper,
+            patientNetworkMapper,
+            specialityNetworkMapper
+        )
+    }
+
+    @Singleton
+    @Provides
+    fun provideMedicalNetworkService(
+        medicalRepository: MedicalRepository,
+        listNetworkMappers: ListNetworkMappers
     ): MedicalNetworkService {
-        return MedicalNetworkServiceImpl(medicalRepository, patientNetworkMapper, specialityNetworkMapper)
+        return MedicalNetworkServiceImpl(medicalRepository, listNetworkMappers)
     }
 
     @Singleton
