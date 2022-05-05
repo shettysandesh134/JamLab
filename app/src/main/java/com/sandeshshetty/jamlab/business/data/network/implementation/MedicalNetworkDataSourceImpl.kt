@@ -1,6 +1,7 @@
 package com.sandeshshetty.jamlab.business.data.network.implementation
 
 import com.sandeshshetty.jamlab.business.data.network.abstraction.MedicalNetworkDataSource
+import com.sandeshshetty.jamlab.business.domain.model.consultation.Speciality
 import com.sandeshshetty.jamlab.business.domain.model.user.User
 import com.sandeshshetty.jamlab.framework.datasource.network.abstraction.MedicalNetworkService
 import com.sandeshshetty.jamlab.framework.presentation.authenticate.register.RegisterRequest
@@ -33,7 +34,7 @@ constructor(
         return medicalNetworkService.getSpecialityList()
     }
 
-    override suspend fun getDoctorList(specialityName: String): DoctorListViewState {
-        return medicalNetworkService.getDoctorList(specialityName)
+    override suspend fun getDoctorList(token: String,speciality: Speciality): DoctorListViewState {
+        return medicalNetworkService.getDoctorList(token,speciality)
     }
 }

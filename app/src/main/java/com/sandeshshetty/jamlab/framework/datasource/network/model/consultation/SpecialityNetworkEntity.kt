@@ -1,8 +1,11 @@
 package com.sandeshshetty.jamlab.framework.datasource.network.model.consultation
 
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 class SpecialityNetworkEntity(
+
+    @PrimaryKey(autoGenerate = false)
     @SerializedName("id")
     val id: Int,
     @SerializedName("did")

@@ -10,6 +10,8 @@ import com.sandeshshetty.jamlab.business.data.network.implementation.MedicalNetw
 import com.sandeshshetty.jamlab.business.data.preferences.abstraction.DataStoreRepository
 import com.sandeshshetty.jamlab.business.data.preferences.implementation.DataStoreRepositoryImpl
 import com.sandeshshetty.jamlab.business.domain.util.EntityMapper
+import com.sandeshshetty.jamlab.framework.datasource.cache.database.MedicalDao
+import com.sandeshshetty.jamlab.framework.datasource.cache.database.MedicalDatabase
 import com.sandeshshetty.jamlab.framework.datasource.network.abstraction.MedicalNetworkService
 import com.sandeshshetty.jamlab.framework.datasource.network.implementation.MedicalNetworkServiceImpl
 import com.sandeshshetty.jamlab.framework.datasource.network.mapper.*
@@ -120,6 +122,10 @@ object AppModule {
         return MedicalNetworkDataSourceImpl(medicalNetworkService)
     }
 
-
+    @Singleton
+    @Provides
+    fun provideMedicalDao(medicalDatabase: MedicalDatabase): MedicalDao {
+        return medicalDatabase.medicalDao()
+    }
 
 }

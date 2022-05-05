@@ -1,5 +1,6 @@
 package com.sandeshshetty.jamlab.framework.datasource.network.abstraction
 
+import com.sandeshshetty.jamlab.business.domain.model.consultation.Speciality
 import com.sandeshshetty.jamlab.business.domain.model.user.User
 import com.sandeshshetty.jamlab.framework.presentation.authenticate.register.RegisterRequest
 import com.sandeshshetty.jamlab.framework.presentation.authenticate.register.RegisterResponse
@@ -18,5 +19,5 @@ interface MedicalNetworkService {
 
     suspend fun getSpecialityList(): SpecialityViewState
 
-    suspend fun getDoctorList(specialityName: String): DoctorListViewState
+    suspend fun getDoctorList(token: String,speciality: Speciality): DoctorListViewState
 }

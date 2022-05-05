@@ -13,7 +13,7 @@ class DoctorNetworkEntity(
     @SerializedName("lid")
     val lid: Int,
 
-//    val profile:
+//   val profile:
     @SerializedName("fname")
     val fname: String? = null,
 

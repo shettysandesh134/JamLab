@@ -85,7 +85,7 @@ class DoctorsFragment : Fragment() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED){
                 doctorsViewModel.doctorStateFlow.collect{ doctorsState->
-                    doctorsState.doctors?.let { doctors->
+                    doctorsState.filteredDoctors?.let { doctors->
                         doctorsAdapter.submitList(doctors)
                     }
                 }

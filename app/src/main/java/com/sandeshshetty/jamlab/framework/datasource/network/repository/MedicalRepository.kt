@@ -38,9 +38,10 @@ interface MedicalRepository {
     suspend fun getSpecialities(): SpecialityResponse
 
     @Headers("content-type: application/json", "Accept: application/json")
-    @GET("/api/public/search")
+    @GET("/api/patient/doctor")
     suspend fun getDoctors(
-        @Query("q")query: String
+        @Header("Authorization") token: String,
+        @Query("sid")sid: String
     ): DoctorListNetworkResponse
 
 

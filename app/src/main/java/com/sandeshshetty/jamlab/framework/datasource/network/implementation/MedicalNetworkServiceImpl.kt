@@ -1,5 +1,6 @@
 package com.sandeshshetty.jamlab.framework.datasource.network.implementation
 
+import com.sandeshshetty.jamlab.business.domain.model.consultation.Speciality
 import com.sandeshshetty.jamlab.business.domain.model.user.User
 import com.sandeshshetty.jamlab.framework.datasource.network.abstraction.MedicalNetworkService
 import com.sandeshshetty.jamlab.framework.datasource.network.mapper.ListNetworkMappers
@@ -46,8 +47,8 @@ constructor(
         return SpecialityViewState(message = response.message, success = response.success, specialities = listNetworkMappers.specialityNetworkMapper.mapFromEntityList(response.specialities))
     }
 
-    override suspend fun getDoctorList(specialityName: String): DoctorListViewState {
-        val response = medicalRepository.getDoctors(specialityName)
+    override suspend fun getDoctorList(token: String,speciality: Speciality): DoctorListViewState {
+        val response = medicalRepository.getDoctors("Bearer $token", "${speciality.id}")
         return DoctorListViewState(message = response.message, success = response.success, doctors = listNetworkMappers.doctorNetworkMapper.mapFromEntityList(response.doctors))
     }
 
