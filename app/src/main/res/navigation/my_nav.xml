@@ -91,11 +91,11 @@
     <fragment
         android:id="@+id/specialityFragment"
         android:name="com.sandeshshetty.jamlab.framework.presentation.consultation.SpecialityFragment"
-        android:label="fragment_speciality_list"
+        android:label="Speciality"
         tools:layout="@layout/fragment_speciality_list" >
         <action
             android:id="@+id/action_specialityFragment_to_doctorsFragment"
-            app:destination="@id/doctorsFragment" />
+            app:destination="@id/doctorsFragment"/>
     </fragment>
     <fragment
         android:id="@+id/doctorsFragment"
@@ -108,6 +108,9 @@
         <action
             android:id="@+id/action_doctorsFragment_to_doctorFilterBottomSheetFragment"
             app:destination="@id/doctorFilterBottomSheetFragment" />
+        <action
+            android:id="@+id/action_doctorsFragment_to_doctorDetailFragment"
+            app:destination="@id/doctorDetailFragment" />
     </fragment>
     <dialog
         android:id="@+id/doctorFilterBottomSheetFragment"
@@ -115,5 +118,14 @@
         android:label="fragment_doctor_filter_bottom_sheet"
         tools:layout="@layout/fragment_doctor_filter_bottom_sheet"
         />
+    <fragment
+        android:id="@+id/doctorDetailFragment"
+        android:name="com.sandeshshetty.jamlab.framework.presentation.consultation.DoctorDetailFragment"
+        android:label="{doctor}"
+        tools:layout="@layout/fragment_doctor_detail" >
+        <argument
+            android:name="doctor"
+            app:argType="com.sandeshshetty.jamlab.business.domain.model.consultation.Doctor" />
+    </fragment>
 
 </navigation>

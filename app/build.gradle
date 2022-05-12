@@ -94,4 +94,6 @@ dependencies {
     def dataStoreVersion = "1.0.0"
     implementation "androidx.datastore:datastore-preferences:$dataStoreVersion"
 
+    def agora = "3.6.2"
+    implementation "io.agora.rtc:full-rtc-basic:$agora"
 }

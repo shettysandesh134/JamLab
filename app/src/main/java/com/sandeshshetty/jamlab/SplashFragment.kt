@@ -27,28 +27,6 @@ class SplashFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-
-//            GlobalScope.launch(Dispatchers.IO) {
-//                val time = measureTimeMillis {
-//
-////                    var answer1: String? = null
-////                    var answer2: String? = null
-////
-////                    val job1 = launch { answer1 = job1() }
-////                    val job2 = launch { answer2 = job1() }
-////                   job1.join()
-////                    job2.join()
-//
-//                    val answer1 = async { job1() }
-//                    val answer2 = async { job2() }
-//
-//                    Log.d(TAG, "The answer is ${answer1.await()}")
-//                    Log.d(TAG, "The answer is ${answer2.await()}")
-//            }
-//                Log.d(TAG, "The time is $time ms")
-//        }
-
-
         (activity as AppCompatActivity?)!!.supportActionBar?.hide()
 
         _binding = FragmentSplashBinding.inflate(inflater, container, false)
@@ -60,7 +38,7 @@ class SplashFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         lifecycleScope.launchWhenCreated {
-            delay(3000)
+            delay(2000)
             findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
 //            findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
         }

@@ -9,11 +9,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.sandeshshetty.jamlab.R
 import com.sandeshshetty.jamlab.business.data.preferences.abstraction.DataStoreRepository
+import com.sandeshshetty.jamlab.business.data.preferences.util.FIRST_TIME
 import com.sandeshshetty.jamlab.databinding.FragmentViewPagerBinding
 import com.sandeshshetty.jamlab.framework.presentation.onBoarding.screens.FirstScreen
 import com.sandeshshetty.jamlab.framework.presentation.onBoarding.screens.SecondScreen
 import com.sandeshshetty.jamlab.framework.presentation.onBoarding.screens.ThirdScreen
-import com.sandeshshetty.jamlab.utils.Constants.FIRST_TIME
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

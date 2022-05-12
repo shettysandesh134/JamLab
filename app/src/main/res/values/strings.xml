@@ -3,6 +3,9 @@
     <string name="appName1">Medical</string>
     <string name="appName2">App</string>
 
+    <string name="agora_app_id">e5657418b5554958bcb6705dc8a59d50</string>
+    <string name="agora_access_token">006e5657418b5554958bcb6705dc8a59d50IABmhDiJXj51ZCdYkNorswqbEoRlXEPq4g4YiJUUgPONESMni+gAAAAAEAB5wLBGd1l3YgEAAQB3WXdi</string>
+
     <!-- onBoardind1-->
     <string name="onBoarding_1_headline">Find your Doctor</string>
 
@@ -61,5 +64,13 @@
     <string name="doctor_filter_gender_male">M</string>
     <string name="doctor_filter_gender_female">F</string>
     <string name="doctor_filter_confirmButton">CONFIRM</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+   <!-- Permission Manager -->
+    <string name="dialog_permission_title">Permission required</string>
+    <string name="dialog_permission_default_message">Default message</string>
+    <string name="dialog_permission_button_positive">OK</string>
 
 </resources>

@@ -3,12 +3,12 @@ package com.sandeshshetty.jamlab.business.usecases.authenicate
 import com.sandeshshetty.jamlab.business.data.network.ApiResponseHandler
 import com.sandeshshetty.jamlab.business.data.network.abstraction.MedicalNetworkDataSource
 import com.sandeshshetty.jamlab.business.data.preferences.abstraction.DataStoreRepository
+import com.sandeshshetty.jamlab.business.data.preferences.util.ACCESS_TOKEN
 import com.sandeshshetty.jamlab.business.data.util.safeApiCall
 import com.sandeshshetty.jamlab.business.domain.state.*
 import com.sandeshshetty.jamlab.business.usecases.authenicate.SignInUseCase.Companion.INVALID_EMAIL_ADDRESS
 import com.sandeshshetty.jamlab.framework.presentation.authenticate.register.RegisterRequest
 import com.sandeshshetty.jamlab.framework.presentation.authenticate.state.AuthenticateViewState
-import com.sandeshshetty.jamlab.utils.Constants.ACCESS_TOKEN
 import com.sandeshshetty.jamlab.utils.isEmailVerified
 import kotlinx.coroutines.Dispatchers.IO
 import javax.inject.Inject

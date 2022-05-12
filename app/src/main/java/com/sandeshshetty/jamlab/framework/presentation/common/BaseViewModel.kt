@@ -22,7 +22,7 @@ abstract class BaseViewModel<ViewState>: ViewModel() {
     val shouldDisplayProgressBar: LiveData<Boolean>
         get() = _shouldDisplayProgressBar
 
-    abstract fun setStateEvent(stateEvent: StateEvent)
+    abstract  fun setStateEvent(stateEvent: StateEvent)
 
     fun launchJob(result: DataState<ViewState>?, stateEvent: StateEvent) {
         result?.let { dataState ->

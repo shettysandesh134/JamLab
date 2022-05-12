@@ -21,15 +21,31 @@ constructor(
     private val _doctorStateFlow = MutableStateFlow(DoctorListViewState())
     val doctorStateFlow get() = _doctorStateFlow.asStateFlow()
 
+    private val _doctorsListEvent = MutableSharedFlow<DoctorsStateEvent>()
+    val doctorsListEvent get() = _doctorsListEvent.asSharedFlow()
+
     private var _doctorViewState = DoctorListViewState()
 
-    override fun setStateEvent(stateEvent: StateEvent) {
+    override  fun setStateEvent(stateEvent: StateEvent) {
         when (stateEvent) {
             is DoctorsStateEvent.GetDoctorsListEvent -> {
                 viewModelScope.launch {
                     isLoading(stateEvent.shouldDisplayProgressbar())
                     val result = getDoctorListUseCase(stateEvent.specality, stateEvent)
                     launchJob(result, stateEvent)
+                }
+
+            }
+            is DoctorsStateEvent.FilterButtonClickedEvent -> {
+                viewModelScope.launch {
+                    _doctorsListEvent.emit(stateEvent)
+                }
+
+            }
+
+            is DoctorsStateEvent.DoctorItemClickedEvent -> {
+                viewModelScope.launch {
+                    _doctorsListEvent.emit(stateEvent)
                 }
 
             }

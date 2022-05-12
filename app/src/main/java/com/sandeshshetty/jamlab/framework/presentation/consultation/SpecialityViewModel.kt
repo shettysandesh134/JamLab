@@ -5,10 +5,8 @@ import com.sandeshshetty.jamlab.business.domain.state.StateEvent
 import com.sandeshshetty.jamlab.business.usecases.consultation.GetSpecialityListUseCase
 import com.sandeshshetty.jamlab.framework.presentation.common.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -22,8 +20,11 @@ constructor(
     private val _specialityViewState = MutableStateFlow(SpecialityViewState())
     val specialityViewState get() = _specialityViewState.asStateFlow()
 
-    private val _specialityShareFlow = MutableSharedFlow<SpecialityStateEvent>()
-    val specialitySharedFlow get() = _specialityShareFlow.asSharedFlow()
+//    private val _specialityShareFlow = MutableSharedFlow<SpecialityStateEvent>()
+//    val specialitySharedFlow get() = _specialityShareFlow.asSharedFlow()
+
+    private val _specialityEventChannel = Channel<SpecialityStateEvent>()
+    val specialityEventChannel = _specialityEventChannel.receiveAsFlow()
 
     init {
         viewModelScope.launch {
@@ -37,7 +38,8 @@ constructor(
         when (stateEvent) {
             is SpecialityStateEvent.OnSpecialityClickEvent -> {
                 viewModelScope.launch {
-                    _specialityShareFlow.emit(stateEvent)
+//                    _specialityShareFlow.emit(stateEvent)
+                    _specialityEventChannel.send(stateEvent)
                 }
 
             }

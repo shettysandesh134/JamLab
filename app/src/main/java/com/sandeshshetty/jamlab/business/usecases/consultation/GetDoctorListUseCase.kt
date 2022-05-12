@@ -3,11 +3,11 @@ package com.sandeshshetty.jamlab.business.usecases.consultation
 import com.sandeshshetty.jamlab.business.data.network.ApiResponseHandler
 import com.sandeshshetty.jamlab.business.data.network.abstraction.MedicalNetworkDataSource
 import com.sandeshshetty.jamlab.business.data.preferences.abstraction.DataStoreRepository
+import com.sandeshshetty.jamlab.business.data.preferences.util.ACCESS_TOKEN
 import com.sandeshshetty.jamlab.business.data.util.safeApiCall
 import com.sandeshshetty.jamlab.business.domain.model.consultation.Speciality
 import com.sandeshshetty.jamlab.business.domain.state.*
 import com.sandeshshetty.jamlab.framework.presentation.consultation.DoctorListViewState
-import com.sandeshshetty.jamlab.utils.Constants
 import kotlinx.coroutines.Dispatchers.IO
 import javax.inject.Inject
 
@@ -23,7 +23,7 @@ constructor(
          stateEvent: StateEvent
     ): DataState<DoctorListViewState>? {
 
-        val accessToken = dataStoreRepository.getString(Constants.ACCESS_TOKEN)
+        val accessToken = dataStoreRepository.getString(ACCESS_TOKEN)
 
         val networkResult = safeApiCall(IO) {
             accessToken?.let {

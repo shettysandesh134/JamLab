@@ -15,7 +15,9 @@ import kotlinx.android.synthetic.main.fragment_doctors.view.*
  * [RecyclerView.Adapter] that can display a [PlaceholderItem].
  * TODO: Replace the implementation with code for your data type.
  */
-class DoctorsRecyclerViewAdapter : RecyclerView.Adapter<DoctorsRecyclerViewAdapter.ViewHolder>() {
+class DoctorsRecyclerViewAdapter(
+    private val listener: onDoctorItemClickListener
+) : RecyclerView.Adapter<DoctorsRecyclerViewAdapter.ViewHolder>() {
 
     private val differCallback = object : DiffUtil.ItemCallback<Doctor>() {
         override fun areItemsTheSame(oldItem: Doctor, newItem: Doctor): Boolean {
@@ -57,6 +59,19 @@ class DoctorsRecyclerViewAdapter : RecyclerView.Adapter<DoctorsRecyclerViewAdapt
 
     inner class ViewHolder(binding: FragmentDoctorsBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.apply {
+                root.setOnClickListener {
+                    val position = bindingAdapterPosition
+                    if (position != RecyclerView.NO_POSITION) {
+                        val item = differ.currentList.get(position)
+                        listener.onItemClick(item)
+                    }
+                }
+            }
+        }
+
         val doctorName: TextView = binding.doctorNameTextView
         val doctorSpeciality: TextView = binding.doctorSpecialityTextView
         val doctorLocation: TextView = binding.doctorLocationTextView
@@ -64,6 +79,10 @@ class DoctorsRecyclerViewAdapter : RecyclerView.Adapter<DoctorsRecyclerViewAdapt
         override fun toString(): String {
             return super.toString() + " '" + doctorSpeciality.text + "'"
         }
+    }
+
+    interface onDoctorItemClickListener {
+        fun onItemClick(doctor: Doctor)
     }
 
 }

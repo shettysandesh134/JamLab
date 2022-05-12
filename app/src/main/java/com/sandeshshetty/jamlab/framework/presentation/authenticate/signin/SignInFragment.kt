@@ -14,7 +14,10 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.sandeshshetty.jamlab.MainActivity
 import com.sandeshshetty.jamlab.R
+import com.sandeshshetty.jamlab.business.domain.state.AreYouSureCallback
 import com.sandeshshetty.jamlab.business.domain.state.MessageType
+import com.sandeshshetty.jamlab.business.domain.state.Response
+import com.sandeshshetty.jamlab.business.domain.state.UIComponentType
 import com.sandeshshetty.jamlab.databinding.FragmentSignInBinding
 import com.sandeshshetty.jamlab.framework.presentation.UIController
 import com.sandeshshetty.jamlab.framework.presentation.authenticate.state.AuthenticateStateEvent
@@ -86,6 +89,8 @@ class SignInFragment : Fragment() {
 
                         is MessageType.Error -> {
                             uiController?.onResponseReceived(response)
+
+
 //                            Toast.makeText(context, response.message, Toast.LENGTH_LONG).show()
                         }
                     }

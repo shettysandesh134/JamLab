@@ -11,6 +11,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.dialog.MaterialDialogs
+import com.sandeshshetty.jamlab.business.domain.state.AreYouSureCallback
 import com.sandeshshetty.jamlab.business.domain.state.MessageType
 import com.sandeshshetty.jamlab.business.domain.state.Response
 import com.sandeshshetty.jamlab.business.domain.state.UIComponentType
@@ -97,8 +98,16 @@ class MainActivity : AppCompatActivity(), UIController {
             is UIComponentType.Dialog -> {
                 displayDialog(response)
             }
+
+            is UIComponentType.AreYouSureDialog -> {
+                areYouSureDialog(
+                    message = response.message,
+                    callback = response.uiComponentType.callback
+                )
+            }
         }
     }
+
 
     private fun displayDialog(
         response: Response
@@ -119,6 +128,26 @@ class MainActivity : AppCompatActivity(), UIController {
                 }
             }
         }
+    }
+
+    private fun areYouSureDialog(
+        message: String?,
+        callback: AreYouSureCallback
+    ) : AlertDialog? {
+        return MaterialAlertDialogBuilder(
+            this,
+            R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
+        )
+            .setTitle(getString(R.string.dialog_success_title))
+            .setMessage(message.toString())
+            .setNegativeButton(getString(R.string.dialog_cancel_button)) { dialog, which->
+                dialogInView = null
+                callback.cancel()
+            }
+            .setPositiveButton(getString(R.string.dialog_ok_button)){ dialog, which->
+                callback.proceed()
+            }
+            .show()
     }
 
     private fun displaySuccessDialog(

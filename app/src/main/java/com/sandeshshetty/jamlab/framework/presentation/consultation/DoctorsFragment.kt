@@ -3,6 +3,7 @@ package com.sandeshshetty.jamlab.framework.presentation.consultation
 import android.content.Context
 import android.os.Bundle
 import android.view.*
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sandeshshetty.jamlab.R
+import com.sandeshshetty.jamlab.business.domain.model.consultation.Doctor
 import com.sandeshshetty.jamlab.databinding.FragmentDoctorsListBinding
 import com.sandeshshetty.jamlab.framework.presentation.UIController
 import com.sandeshshetty.jamlab.utils.displayToast
@@ -27,16 +29,16 @@ import kotlinx.coroutines.launch
  * A fragment representing a list of Items.
  */
 @AndroidEntryPoint
-class DoctorsFragment : Fragment() {
+class DoctorsFragment : Fragment(), DoctorsRecyclerViewAdapter.onDoctorItemClickListener {
 
     val args: DoctorsFragmentArgs by navArgs()
 
     private var _binding: FragmentDoctorsListBinding? = null
     private val binding get() = _binding!!
     private val doctorsViewModel: DoctorsViewModel by activityViewModels()
-    private val doctorsAdapter = DoctorsRecyclerViewAdapter()
+    private val doctorsAdapter = DoctorsRecyclerViewAdapter(this)
 
-    private  var uiController: UIController? = null
+    private var uiController: UIController? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,6 +62,12 @@ class DoctorsFragment : Fragment() {
         }
 
         collectFlows()
+        collectEvents()
+
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            findNavController().navigateUp()
+        }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -68,9 +76,9 @@ class DoctorsFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.id.action_filter->{
-                findNavController().navigate(R.id.action_doctorsFragment_to_doctorFilterBottomSheetFragment)
+        when (item.itemId) {
+            R.id.action_filter -> {
+                doctorsViewModel.setStateEvent(DoctorsStateEvent.FilterButtonClickedEvent)
             }
         }
         return true
@@ -81,11 +89,16 @@ class DoctorsFragment : Fragment() {
         uiController = requireActivity().setUiController()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun collectFlows() {
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
-                doctorsViewModel.doctorStateFlow.collect{ doctorsState->
-                    doctorsState.filteredDoctors?.let { doctors->
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                doctorsViewModel.doctorStateFlow.collect { doctorsState ->
+                    doctorsState.filteredDoctors?.let { doctors ->
                         doctorsAdapter.submitList(doctors)
                     }
                 }
@@ -95,5 +108,29 @@ class DoctorsFragment : Fragment() {
         doctorsViewModel.shouldDisplayProgressBar.observe(viewLifecycleOwner, Observer {
             uiController?.displayProgessBar(it)
         })
+    }
+
+    private fun collectEvents() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                doctorsViewModel.doctorsListEvent.collect {
+                    when (it) {
+                        is DoctorsStateEvent.FilterButtonClickedEvent -> {
+                            findNavController().navigate(R.id.action_doctorsFragment_to_doctorFilterBottomSheetFragment)
+                        }
+
+                        is DoctorsStateEvent.DoctorItemClickedEvent-> {
+                            val action = DoctorsFragmentDirections.actionDoctorsFragmentToDoctorDetailFragment(it.doctor)
+                            findNavController().navigate(action)
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+
+    override fun onItemClick(doctor: Doctor) {
+        doctorsViewModel.setStateEvent(DoctorsStateEvent.DoctorItemClickedEvent(doctor))
     }
 }
